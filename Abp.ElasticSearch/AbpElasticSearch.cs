@@ -50,7 +50,7 @@ namespace Abp.ElasticSearch
         /// <param name="shard"></param>
         /// <param name="numberOfReplicas"></param>
         /// <returns></returns>
-        public virtual async Task CrateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1)
+        public virtual async Task CreateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1)
         {
             var exits = await EsClient.Indices.AliasExistsAsync(indexName);
 

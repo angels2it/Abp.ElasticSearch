@@ -20,7 +20,7 @@ namespace Abp.ElasticSearch
         /// <param name="shard"></param>
         /// <param name="numberOfReplicas"></param>
         /// <returns></returns>
-        Task CrateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1);
+        Task CreateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1);
 
         /// <summary>
         /// CreateEsIndex auto Mapping T Property
