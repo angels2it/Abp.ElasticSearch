@@ -62,7 +62,12 @@ namespace Abp.ElasticSearch
                     ss =>
                         ss.Index(newName)
                             .Settings(
-                                o => o.NumberOfShards(shard).NumberOfReplicas(numberOfReplicas)
+                                o => o
+                                    .NumberOfShards(shard)
+                                    .NumberOfReplicas(numberOfReplicas)
+                                    .Analysis(a => a
+                                        .Analyzers(n => n
+                                                        .Custom("default", nf => nf.Tokenizer("icu_tokenizer").CharFilters("icu_normalizer").Filters("icu_folding"))))
                                     .Setting("max_result_window", int.MaxValue)));
             if (result.Acknowledged)
             {
@@ -97,8 +102,13 @@ namespace Abp.ElasticSearch
                         ss.Index(newName)
                             .Settings(
                                 o => o.NumberOfShards(shard).NumberOfReplicas(numberOfReplicas)
+                                .Analysis(a => a
+                                        .Analyzers(n => n
+                                                        .Custom("default", nf => nf.Tokenizer("icu_tokenizer").CharFilters("icu_normalizer").Filters("icu_folding"))))
                                     .Setting("max_result_window", int.MaxValue))
-                            .Map(m => m.AutoMap<T>()));
+
+                            .Map(m => m
+                                        .AutoMap<T>()));
             if (result.Acknowledged)
             {
                 await EsClient.Indices.PutAliasAsync(newName, indexName);
@@ -203,7 +213,7 @@ namespace Abp.ElasticSearch
                 await BulkDelete<T, TKey>(indexName, list);
             else
             {
-                var total = (int) Math.Ceiling(list.Count * 1.0f / bulkNum);
+                var total = (int)Math.Ceiling(list.Count * 1.0f / bulkNum);
                 var tasks = new List<Task>();
                 for (var i = 0; i < total; i++)
                 {

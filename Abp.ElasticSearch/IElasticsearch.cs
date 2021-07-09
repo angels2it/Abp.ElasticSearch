@@ -12,6 +12,8 @@ namespace Abp.ElasticSearch
     /// </summary>
     public interface IElasticsearch : ITransientDependency
     {
+        IElasticClient EsClient { get; set; }
+
         /// <summary>
         /// CreateEsIndex Not Mapping
         /// Auto Set Alias alias is Input IndexName

@@ -14,7 +14,7 @@ AbpElasticSearch扩展包，默认集成elasticsearch，
     <PackageProjectUrl>https://github.com/ShiWei-L/Abp.ElasticSearch</PackageProjectUrl>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>DaiViet.Core.ElasticSearch</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
